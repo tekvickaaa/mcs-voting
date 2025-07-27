@@ -3,7 +3,7 @@ from datetime import timedelta
 from random import choices
 from typing import List
 from pydantic import BaseModel
-from fastapi import FastAPI, HTTPException, WebSocket
+from fastapi import FastAPI, HTTPException
 from sqlalchemy import create_engine, Column, Integer, Boolean, String, DateTime, ForeignKey
 from sqlalchemy.orm import sessionmaker, DeclarativeBase, relationship, Mapped, mapped_column
 import psycopg2
@@ -52,19 +52,6 @@ class NewVote(BaseModel):
     content: str
     choices: List[str]
 
-
-"""
-con = psycopg2.connect(
-    dbname="voting",
-    user="user",
-    password="pass",
-    host="localhost",
-    port="5432"
-)
-cursor = con.cursor()
-
-cursor.execute("CREATE TABLE test (id serial PRIMARY KEY, num integer, data varchar);")
-"""
 
 @app.get("/getvote")
 async def get_vote(topic_id: int):
